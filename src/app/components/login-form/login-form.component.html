@@ -1,0 +1,23 @@
+<section class="form vh-100 vw-100 d-flex justify-content-center align-items-center bg-body-secondary fixed-top">
+  <form class="w-25 d-flex flex-column gap-3 bg-dark-subtle rounded p-5" [formGroup]="form" (ngSubmit)="onEnviar($event)">
+    <h1 class="text-primary text-decoration-underline">Log In</h1>
+    <div class="input">
+      <label class="mb-2" for="email">Email</label>
+      <input type="text" class="form-control" name="email" formControlName="email">
+      <div class="validators" *ngIf="Mail?.dirty || Mail?.touched">
+        <span class="text-danger" *ngIf="Mail?.hasError('required')">El email es requerido.</span>
+        <span class="text-danger" *ngIf="Mail?.hasError('email')">El formato no es valido.</span>
+      </div>
+    </div>
+    <div class="input">
+      <label class="mb-2" for="password">Password</label>
+      <input type="password" class="form-control" name="password" formControlName="password">
+      <div class="validators" *ngIf="Password?.dirty || Password?.touched">
+          <span class="text-danger" *ngIf="Password?.hasError('required')">La contraseña es requerida.</span>
+          <span class="text-danger" *ngIf="Password?.hasError('minlength')">La contraseña debe ser de 6 caracteres o más.</span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-5">Login</button>
+    <button type="submit" class="btn btn-outline-primary mt-5" routerLink="">Back</button>
+  </form>
+</section>
