@@ -3,7 +3,7 @@
     <h1 class="text-primary text-decoration-underline">Log In</h1>
     <div class="input">
       <label class="mb-2" for="user">Username</label>
-      <input type="text" class="form-control" name="user" formControlName="user">
+      <input type="text" class="form-control" name="user" autocomplete="off" formControlName="user">
       <div class="validators" *ngIf="User?.dirty || User?.touched">
         <span class="text-danger" *ngIf="User?.hasError('required')">El usuario es requerido.</span>
       </div>

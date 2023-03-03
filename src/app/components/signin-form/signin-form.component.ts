@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserDataService } from 'src/app/services/user-data.service';
 import Swal from 'sweetalert2';
 
@@ -10,8 +11,15 @@ import Swal from 'sweetalert2';
 })
 export class SigninFormComponent {
   form!: FormGroup;
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+  })
 
-  constructor(private formBuilder: FormBuilder, private userData: UserDataService) {
+  constructor(private formBuilder: FormBuilder, private userData: UserDataService, private router: Router) {
     this.form = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
@@ -51,12 +59,35 @@ export class SigninFormComponent {
         "dateOfBirth": this.form.get('dateOfBirth')?.value,
         "sex": this.form.get('sex')?.value
       };
-      this.userData.saveUser(user).subscribe();
-      Swal.fire({
-        title: 'Te has registrado',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      })
+      this.userData.saveUser(user).subscribe(data => {}, HttpResponse => {
+        if (HttpResponse.status == 200) {
+          this.Toast.fire({
+            icon: 'success',
+            title: 'Te has registrado. Redirigiendo al inicio'
+          })
+          setTimeout(() => {
+            this.router.navigateByUrl('/');
+          }, 2000);
+        }
+        else if (HttpResponse.status == 400) {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'No es posible conectar con el servidor. Error: ' + HttpResponse.status
+          })
+        }
+        else if (HttpResponse.status == 500) {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'El usuario indicado ya esta registrado'
+          })
+        }
+        else {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'No es posible realizar esta acción en este momento. Error desconocido'
+          })
+        }
+      });
     }else{
       this.form.markAllAsTouched();
     }

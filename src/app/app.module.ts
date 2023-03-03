@@ -9,13 +9,15 @@ import { SigninFormComponent } from './components/signin-form/signin-form.compon
 import { HomeComponent } from './components/home/home.component';
 import { HttpClient } from '@angular/common/http';
 import { UserDataService } from './services/user-data.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     SigninFormComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

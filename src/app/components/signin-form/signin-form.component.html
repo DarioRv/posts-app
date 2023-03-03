@@ -3,7 +3,7 @@
     <h1 class="text-primary text-decoration-underline">Sign In</h1>
     <div class="input">
       <label class="mb-2" for="user">User</label>
-      <input type="text" class="form-control" name="user" id="user" formControlName="user">
+      <input type="text" class="form-control" name="user" id="user" autocomplete="off" formControlName="user">
       <div class="validators" *ngIf="User?.dirty || User?.touched">
         <span class="text-danger" *ngIf="User?.hasError('required')">El usuario es requerido.</span>
         <span class="text-danger" *ngIf="User?.hasError('minlength')">El usuario debe ser de 4 caracteres o más.</span>
@@ -12,7 +12,7 @@
     </div>
     <div class="input">
       <label class="mb-2" for="email">Email</label>
-      <input type="text" class="form-control" name="email" id="email" formControlName="email">
+      <input type="text" class="form-control" name="email" id="email" autocomplete="off" formControlName="email">
       <div class="validators" *ngIf="Mail?.dirty || Mail?.touched">
         <span class="text-danger" *ngIf="Mail?.hasError('required')">El email es requerido.</span>
         <span class="text-danger" *ngIf="Mail?.hasError('email')">El formato no es valido.</span>
@@ -36,12 +36,12 @@
     </div>
     <div class="input">
       <label class="mb-2" for="sex">Sex</label>
-      <input type="text" class="form-control" name="sex" id="sex" value="Prefiero no decir" formControlName="sex">
+      <input type="text" class="form-control" name="sex" id="sex" value="Prefiero no decir" autocomplete="off" formControlName="sex">
       <div class="validators" *ngIf="Sex?.dirty || Sex?.touched">
         <span class="text-danger" *ngIf="Sex?.hasError('required')">El sexo es requerido.</span>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-5">Login</button>
+    <button type="submit" class="btn btn-primary mt-5">Sign in</button>
     <button type="submit" class="btn btn-outline-primary mt-5" routerLink="">Back</button>
   </form>
 </section>

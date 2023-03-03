@@ -1,0 +1,5 @@
+<section class="dashboard vw-100 vh-100 bg-body-secondary">
+  <h2><span class="text-secondary fs-2">¡BIENVENIDO!  </span><span class="text-primary fs-1">{{currentUser.username | uppercase}}</span></h2>
+  <button class="btn btn-primary" (click)="logout()">Log out</button>
+  <button class="btn btn-outline-danger" (click)="deleteUser(currentUser?.id)">Delete account</button>
+</section>

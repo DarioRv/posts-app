@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserActions } from 'src/app/services/user-actions';
 import { UserDataService } from 'src/app/services/user-data.service';
 import Swal from 'sweetalert2';
 
@@ -10,8 +11,15 @@ import Swal from 'sweetalert2';
 })
 export class LoginFormComponent {
   form!: FormGroup;
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+  })
 
-  constructor(private formBuilder: FormBuilder, private userData: UserDataService) {
+  constructor(private formBuilder: FormBuilder, private userData: UserDataService, private userActions: UserActions) {
     this.form = this.formBuilder.group({
       user: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -34,18 +42,24 @@ export class LoginFormComponent {
         "password": this.Password?.value
       };
       this.userData.login(userLogin).subscribe((data: any) => {
-        if (data != null) {
-          Swal.fire({
-            title: 'Has iniciado sesion',
-            icon: 'success',
-            confirmButtonText: 'Ok'
+        this.userActions.login(data);
+      }, HttpResponse => {
+        if (HttpResponse.status == 400) {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'No es posible conectar con el servidor. Error: ' + HttpResponse.status
+          })
+        }
+        else if (HttpResponse.status == 500) {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'El servidor esta experimentando problemas, intente mas tarde'
           })
         }
         else {
-          Swal.fire({
-            title: 'Credenciales incorrectas',
+          this.Toast.fire({
             icon: 'error',
-            confirmButtonText: 'Ok'
+            title: 'No es posible realizar esta acción en este momento. Error desconocido'
           })
         }
       });
