@@ -25,4 +25,8 @@ export class UserDataService {
   getAllUsers(): Observable<any> {
     return this.httpClient.get(`${this.API}/get/all-users`);
   }
+
+  login(userLogin: any): Observable<any> {
+    return this.httpClient.post(`${this.API}/login`, userLogin);
+  }
 }

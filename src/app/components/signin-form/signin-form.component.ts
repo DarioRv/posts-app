@@ -42,6 +42,7 @@ export class SigninFormComponent {
   }
 
   sendForm(event: Event) {
+    event.preventDefault;
     if (this.form.valid){
       const user = {
         "username": this.form.get('user')?.value,
@@ -50,14 +51,12 @@ export class SigninFormComponent {
         "dateOfBirth": this.form.get('dateOfBirth')?.value,
         "sex": this.form.get('sex')?.value
       };
-      console.log(user)
       this.userData.saveUser(user).subscribe();
       Swal.fire({
         title: 'Te has registrado',
         icon: 'success',
         confirmButtonText: 'Ok'
       })
-
     }else{
       this.form.markAllAsTouched();
     }
