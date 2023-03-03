@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserDataService } from 'src/app/services/user-data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'signin-form',
@@ -9,11 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SigninFormComponent {
   form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private userData: UserDataService) {
     this.form = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
+      dateOfBirth: ['', [Validators.required]],
+      sex: ['', [Validators.required]]
     });
   }
 
@@ -29,10 +33,31 @@ export class SigninFormComponent {
    return this.form.get("email");
   }
 
-  onEnviar(event: Event) {
-    event.preventDefault;
+  get DateOfBirth() {
+    return this.form.get("dateOfBirth");
+  }
+
+  get Sex() {
+    return this.form.get("sex");
+  }
+
+  sendForm(event: Event) {
     if (this.form.valid){
-      alert("Todo salio bien ¡Enviar formuario!")
+      const user = {
+        "username": this.form.get('user')?.value,
+        "password": this.form.get('password')?.value,
+        "email": this.form.get('email')?.value,
+        "dateOfBirth": this.form.get('dateOfBirth')?.value,
+        "sex": this.form.get('sex')?.value
+      };
+      console.log(user)
+      this.userData.saveUser(user).subscribe();
+      Swal.fire({
+        title: 'Te has registrado',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+
     }else{
       this.form.markAllAsTouched();
     }

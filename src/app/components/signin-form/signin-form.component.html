@@ -1,9 +1,9 @@
 <section class="form vh-100 vw-100 d-flex justify-content-center align-items-center bg-body-secondary fixed-top">
-  <form class="w-25 d-flex flex-column gap-3 bg-dark-subtle rounded p-5" [formGroup]="form" (ngSubmit)="onEnviar($event)">
+  <form class="w-75 h-75 d-flex flex-column gap-3 bg-dark-subtle rounded p-2 p-md-5 overflow-auto" style="max-width: 400px;" [formGroup]="form" (ngSubmit)="sendForm($event)">
     <h1 class="text-primary text-decoration-underline">Sign In</h1>
     <div class="input">
       <label class="mb-2" for="user">User</label>
-      <input type="text" class="form-control" name="user" formControlName="user">
+      <input type="text" class="form-control" name="user" id="user" formControlName="user">
       <div class="validators" *ngIf="User?.dirty || User?.touched">
         <span class="text-danger" *ngIf="User?.hasError('required')">El usuario es requerido.</span>
         <span class="text-danger" *ngIf="User?.hasError('minlength')">El usuario debe ser de 4 caracteres o más.</span>
@@ -12,7 +12,7 @@
     </div>
     <div class="input">
       <label class="mb-2" for="email">Email</label>
-      <input type="text" class="form-control" name="email" formControlName="email">
+      <input type="text" class="form-control" name="email" id="email" formControlName="email">
       <div class="validators" *ngIf="Mail?.dirty || Mail?.touched">
         <span class="text-danger" *ngIf="Mail?.hasError('required')">El email es requerido.</span>
         <span class="text-danger" *ngIf="Mail?.hasError('email')">El formato no es valido.</span>
@@ -20,11 +20,25 @@
     </div>
     <div class="input">
       <label class="mb-2" for="password">Password</label>
-      <input type="password" class="form-control" name="password" formControlName="password">
+      <input type="password" class="form-control" name="password" id="password" formControlName="password">
       <div class="validators" *ngIf="Password?.dirty || Password?.touched">
           <span class="text-danger" *ngIf="Password?.hasError('required')">La contraseña es requerida.</span>
           <span class="text-danger" *ngIf="Password?.hasError('minlength')">La contraseña debe ser de 6 caracteres o más.</span>
           <span class="text-danger" *ngIf="Password?.hasError('maxlength')">La contraseña no puede tener de 12 caracteres o más.</span>
+      </div>
+    </div>
+    <div class="input">
+      <label class="mb-2" for="dateOfBirth">DateOfBirth</label>
+      <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth">
+      <div class="validators" *ngIf="DateOfBirth?.dirty || DateOfBirth?.touched">
+        <span class="text-danger" *ngIf="DateOfBirth?.hasError('required')">La fecha de nacimiento es requerido.</span>
+      </div>
+    </div>
+    <div class="input">
+      <label class="mb-2" for="sex">Sex</label>
+      <input type="text" class="form-control" name="sex" id="sex" value="Prefiero no decir" formControlName="sex">
+      <div class="validators" *ngIf="Sex?.dirty || Sex?.touched">
+        <span class="text-danger" *ngIf="Sex?.hasError('required')">El sexo es requerido.</span>
       </div>
     </div>
     <button type="submit" class="btn btn-primary mt-5">Login</button>

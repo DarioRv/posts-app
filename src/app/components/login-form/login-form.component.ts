@@ -24,7 +24,7 @@ export class LoginFormComponent {
    return this.form.get("email");
   }
 
-  onEnviar(event: Event) {
+  sendForm(event: Event) {
     event.preventDefault;
     if (this.form.valid){
       alert("Todo salio bien ¡Enviar formuario!")
