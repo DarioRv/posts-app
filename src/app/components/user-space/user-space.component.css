@@ -1,0 +1,13 @@
+.add-post {
+  display: grid;
+  place-content: center;
+  border: 3px dashed #7e7e7e;
+  color: #7e7e7e;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.add-post:hover {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}

@@ -74,5 +74,55 @@ export class UserActions {
         })
       }
     });
-}
+  }
+
+  savePost(post: any) {
+    this.userData.savePost(post).subscribe();
+    this.Toast.fire({
+      icon: 'success',
+      title: 'Post publicado. Actualizando la página'
+    })
+    setTimeout(() => {
+      this.router.navigateByUrl('dashboard');
+    }, 2000);
+  }
+
+  deletePost(postId: number) {
+    this.userData.deletePost(postId).subscribe();
+    this.Toast.fire({
+      icon: 'success',
+      title: 'Post eliminado. Actualizando la página'
+    })
+    setTimeout(() => {
+      this.router.navigateByUrl('dashboard');
+    }, 2000);
+  }
+
+  commentOnAPost (post: any, comment: string) {
+    let user = JSON.parse(localStorage.getItem('currentUser')!);
+    const userComment = {
+      "text": comment,
+      "post": post,
+      "user": user,
+    }
+    this.userData.saveComment(userComment).subscribe();
+    this.Toast.fire({
+      icon: 'success',
+      title: 'Comentario enviado. Actualizando la página'
+    })
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
+
+  deleteComment (commentId: number) {
+    this.userData.deleteComment(commentId).subscribe();
+    this.Toast.fire({
+      icon: 'success',
+      title: 'Comentario eliminado. Actualizando la página'
+    })
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
 }

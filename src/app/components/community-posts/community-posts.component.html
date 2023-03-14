@@ -1,0 +1,30 @@
+<section class="user-space w-100 py-3 bg-body-secondary">
+  <div class="my-posts px-5">
+    <h3 class="display-3 text-primary mb-5">Recently posted</h3>
+    <div class="posts d-flex flex-column gap-3">
+      <div class="no-posts" *ngIf="communityPosts?.length == 0">
+        <p class="fs-1 text-center bg-info-subtle border border-3 border-info rounded">Aún no existen posts. ¡Sé el primero en crear uno!</p>
+      </div>
+      <div class="post bg-secondary-subtle p-2 rounded" *ngFor="let post of communityPosts">
+        <h4>{{post?.title}}</h4>
+        <p class="text-dark-emphasis">{{post?.body}}</p>
+        <p class="text-dark-emphasis">Posted on {{post?.date}}</p>
+        <div class="users-comments px-3 py-4">
+          <h5>Comments</h5>
+          <div class="cometary bg-warning-subtle rounded px-3 py-2 my-3" *ngFor="let comment of post?.postComments">
+            <h6 class="text-dark-emphasis text-decoration-underline">{{comment?.username}}</h6>
+            <p class="text-dark-emphasis">{{comment?.text}}</p>
+            <button class="btn btn-outline-danger" *ngIf="currentUser?.id == comment?.idUserFk" (click)="deleteComment(comment?.id)"><i class="bi bi-trash3-fill"></i></button>
+          </div>
+          <form class="w-100 d-flex flex-column gap-2" style="max-width: 400px;" [formGroup]="form" (submit)="sendComment(post)">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" formControlName="comment"></textarea>
+              <label class="text-muted" for="floatingTextarea">Leave a comment</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Send comment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

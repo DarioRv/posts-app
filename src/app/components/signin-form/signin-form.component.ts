@@ -34,19 +34,19 @@ export class SigninFormComponent {
   }
 
   get Password() {
-    return this.form.get("password");
+    return this.form.get('password');
   }
 
   get Mail() {
-   return this.form.get("email");
+   return this.form.get('email');
   }
 
   get DateOfBirth() {
-    return this.form.get("dateOfBirth");
+    return this.form.get('dateOfBirth');
   }
 
   get Sex() {
-    return this.form.get("sex");
+    return this.form.get('sex');
   }
 
   sendForm(event: Event) {

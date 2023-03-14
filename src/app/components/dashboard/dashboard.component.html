@@ -1,5 +1,13 @@
-<section class="dashboard vw-100 vh-100 bg-body-secondary">
-  <h2><span class="text-secondary fs-2">¡BIENVENIDO!  </span><span class="text-primary fs-1">{{currentUser.username | uppercase}}</span></h2>
-  <button class="btn btn-primary" (click)="logout()">Log out</button>
-  <button class="btn btn-outline-danger" (click)="deleteUser(currentUser?.id)">Delete account</button>
+<section class="dashboard w-100 vh-100 bg-body-secondary">
+  <header-component></header-component>
+  <div class="get-started px-5 py-3"  *ngIf="getPath() == '/dashboard'">
+    <h2 class="display-3 mb-5"><span class="text-secondary">Welcome! </span><span class="text-primary">{{currentUser?.username | uppercase}}</span></h2>
+    <p class="fs-2"><span class="text-primary">¡Ya tienes tu cuenta!</span> Puedes empezar a crear publicaciones o ver publicaciones de los demás usuarios e incluso comentarlas.</p>
+    <p class="fs-1 text-primary text-center">¡Empieza a navegar!</p>
+    <div class="warning-alert bg-warning-subtle border border-3 border-warning rounded mt-5 p-3">
+      <p class="fs-2 text-warning text-center">¡ATENCIÓN! <i class="bi bi-exclamation-circle"></i></p>
+      <p class="fs-5 text-center">Ten en cuenta que este producto es un <em>early access</em> por lo que la experiencia de usuario puede verse afectada debido a diversas fallas aún no catalogadas. Puede borrar tu cuenta y tu información en todo momento desde la pestaña <em class="text-primary-emphasis"><b>Account</b></em>.</p>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
 </section>

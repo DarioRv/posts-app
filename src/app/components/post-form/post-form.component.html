@@ -1,0 +1,12 @@
+<form class="d-flex flex-column gap-2" (submit)="createPost()">
+  <input class="form-control" type="text" name="title" placeholder="Titulo" [(ngModel)]="title">
+  <textarea class="form-control" name="body" placeholder="Contenido de la nota..." [(ngModel)]="body"></textarea>
+  <input class="form-control" type="file" name="image" [(ngModel)]="image">
+  <div class="input-group">
+    <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
+    <input class="form-control" type="text" name="date" disabled [value]="getDate()">
+  </div>
+  <button class="btn btn-primary" type="submit">Enviar</button>
+  <button class="btn btn-outline-danger" type="button" routerLink="my-space">Cancelar</button>
+
+</form>

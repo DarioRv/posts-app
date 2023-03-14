@@ -1,0 +1,11 @@
+<section class="user-account w-100 bg-body-secondary py-3 px-5">
+  <h2 class="display-3 text-primary">My account</h2>
+  <div class="user-info">
+    <p class="fs-5 bg-primary-subtle rounded p-2">Username: <span class="text-dark-emphasis">{{currentUser?.username}}</span></p>
+    <p class="fs-5 bg-primary-subtle rounded p-2">Password: <span class="text-dark-emphasis">{{currentUser?.password}}</span></p>
+    <p class="fs-5 bg-primary-subtle rounded p-2">Sex: <span class="text-dark-emphasis">{{currentUser?.sex}}</span></p>
+    <p class="fs-5 bg-primary-subtle rounded p-2">Date of birth: <span class="text-dark-emphasis">{{currentUser?.dateOfBirth}}</span></p>
+    <p class="fs-5 bg-primary-subtle rounded p-2">Email: <span class="text-dark-emphasis">{{currentUser?.email}}</span></p>
+  </div>
+  <button class="btn btn-outline-danger" (click)="deleteUser()">Delete account</button>
+</section>
