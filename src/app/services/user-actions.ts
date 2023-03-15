@@ -83,7 +83,7 @@ export class UserActions {
       title: 'Post publicado. Actualizando la página'
     })
     setTimeout(() => {
-      this.router.navigateByUrl('dashboard');
+      window.location.reload();
     }, 2000);
   }
 
@@ -94,7 +94,7 @@ export class UserActions {
       title: 'Post eliminado. Actualizando la página'
     })
     setTimeout(() => {
-      this.router.navigateByUrl('dashboard');
+      window.location.reload();
     }, 2000);
   }
 

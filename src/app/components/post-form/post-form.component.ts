@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserActions } from 'src/app/services/user-actions';
 
 @Component({
@@ -8,11 +9,15 @@ import { UserActions } from 'src/app/services/user-actions';
 })
 export class PostFormComponent implements OnInit {
   currentUser: any;
-  title!: string;
-  body!: string;
-  image: any;
+  postForm!: FormGroup;
 
-  constructor(private userActions: UserActions) {}
+  constructor(private userActions: UserActions, private formBuilder: FormBuilder) {
+    this.postForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      body: ['', [Validators.required]],
+      image: ['', []]
+    });
+  }
 
   ngOnInit(): void {
     this.currentUser = localStorage.getItem('currentUser');
@@ -23,14 +28,31 @@ export class PostFormComponent implements OnInit {
     return new Date().toLocaleString();
   }
 
+  get Title() {
+    return this.postForm.get('title');
+  }
+
+  get Body() {
+    return this.postForm.get('body');
+  }
+
+  get Image() {
+    return this.postForm.get('image');
+  }
+
   createPost() {
-    const post = {
-      "title": this.title,
-      "body": this.body,
-      "image": this.image,
-      "date": this.getDate(),
-      "userOwner": this.currentUser
+    if (this.postForm.valid) {
+      const post = {
+        "title": this.Title?.value,
+        "body": this.Body?.value,
+        "image": this.Image?.value,
+        "date": this.getDate(),
+        "userOwner": this.currentUser
+      }
+      this.userActions.savePost(post);
     }
-    this.userActions.savePost(post);
+    else {
+      this.postForm.markAllAsTouched();
+    }
   }
 }

@@ -16,7 +16,7 @@ export class UserSpaceComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(this.currentUser);
-    this.userData.getPostsByOwnerId(this.currentUser.id).subscribe(data => {this.userPosts = data.reverse(); console.log(data)})
+    this.userData.getPostsByOwnerId(this.currentUser.id).subscribe(data => {this.userPosts = data.reverse();})
   }
 
   deletePost(postId: number): void {
