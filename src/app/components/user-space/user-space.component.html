@@ -8,7 +8,7 @@
   <div class="my-posts px-5 d-flex flex-column align-items-center">
     <h3 class="text-white my-4 px-3 py-1 bg-primary" style="width: fit-content;">Your Posts</h3>
     <div class="no-posts" *ngIf="userPosts?.length == 0">
-      <p class="fs-1 text-center bg-info-subtle border border-3 border-info rounded">Aún no existen posts. ¡Crea uno!</p>
+      <p class="fs-1 text-center text-dark-emphasis bg-info-subtle border-info rounded p-2">There is nothing here. Create a post!</p>
     </div>
     <div class="posts w-100 d-flex flex-column gap-3">
       <div class="post bg-secondary-subtle p-2 rounded" *ngFor="let post of userPosts">

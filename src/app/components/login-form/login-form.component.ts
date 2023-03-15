@@ -43,25 +43,6 @@ export class LoginFormComponent {
       };
       this.userData.login(userLogin).subscribe((data: any) => {
         this.userActions.login(data);
-      }, HttpResponse => {
-        if (HttpResponse.status == 400) {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'No es posible conectar con el servidor. Error: ' + HttpResponse.status
-          })
-        }
-        else if (HttpResponse.status == 500) {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'El servidor esta experimentando problemas, intente mas tarde'
-          })
-        }
-        else {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'No es posible realizar esta acción en este momento. Error desconocido'
-          })
-        }
       });
     }else{
       this.form.markAllAsTouched();

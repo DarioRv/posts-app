@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserActions } from 'src/app/services/user-actions';
 import { UserDataService } from 'src/app/services/user-data.service';
 import Swal from 'sweetalert2';
 
@@ -19,7 +20,7 @@ export class SigninFormComponent {
     timerProgressBar: true,
   })
 
-  constructor(private formBuilder: FormBuilder, private userData: UserDataService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private userData: UserDataService, private userActions: UserActions) {
     this.form = this.formBuilder.group({
       user: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
@@ -59,35 +60,17 @@ export class SigninFormComponent {
         "dateOfBirth": this.form.get('dateOfBirth')?.value,
         "sex": this.form.get('sex')?.value
       };
-      this.userData.saveUser(user).subscribe(data => {}, HttpResponse => {
-        if (HttpResponse.status == 200) {
-          this.Toast.fire({
-            icon: 'success',
-            title: 'Te has registrado. Redirigiendo al inicio'
-          })
-          setTimeout(() => {
-            this.router.navigateByUrl('/');
-          }, 2000);
-        }
-        else if (HttpResponse.status == 400) {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'No es posible conectar con el servidor. Error: ' + HttpResponse.status
-          })
-        }
-        else if (HttpResponse.status == 500) {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'El usuario indicado ya esta registrado'
-          })
-        }
-        else {
-          this.Toast.fire({
-            icon: 'error',
-            title: 'No es posible realizar esta acción en este momento. Error desconocido'
-          })
-        }
-      });
+      this.userData.saveUser(user).subscribe();
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Te has registrado. Iniciando sesion.'
+      })
+      const userLogin = {"username": this.form.get('user')?.value, "password": this.form.get('password')?.value};
+      setTimeout(() => {
+        this.userData.login(userLogin).subscribe(data => {
+          this.userActions.login(data)
+        });
+      }, 2000);
     }else{
       this.form.markAllAsTouched();
     }
