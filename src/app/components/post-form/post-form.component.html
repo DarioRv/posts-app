@@ -1,14 +1,15 @@
-<form class="d-flex flex-column gap-2" style="width: 90vw;" [formGroup]="postForm" (submit)="createPost()">
+<form method="post" action="../../services/upload.php" class="d-flex flex-column gap-2" style="width: 90vw;" [formGroup]="postForm" (submit)="createPost($event)">
   <input class="form-control" type="text" name="title" placeholder="Titulo" formControlName="title">
   <div class="validators" *ngIf="Title?.dirty || Title?.touched">
-    <span class="text-danger" *ngIf="Title?.hasError('required')">Title is required <i class="bi bi-exclamation-circle"></i></span>
+    <span class="text-danger" *ngIf="Title?.hasError('required')">Post's title is required <i class="bi bi-exclamation-circle"></i></span>
   </div>
   <textarea class="form-control" name="body" placeholder="Contenido de la nota..." formControlName="body"></textarea>
   <div class="validators" *ngIf="Body?.dirty || Body?.touched">
     <span class="text-danger" *ngIf="Body?.hasError('required')">Post's body is required <i class="bi bi-exclamation-circle"></i></span>
   </div>
-  <input class="form-control" type="file" name="image" formControlName="image">
-  <span class="text-info">You can attach a picture <i class="bi bi-info-circle"></i></span>
+  <input class="form-control" type="file" accept=".png, .jpg, .jpeg, .gif" multiple name="image" formControlName="image" (change)="generateImagePreview($event)">
+  <span class="text-info">You can attach a picture (max size 10MB) <i class="bi bi-info-circle"></i></span>
+  <img class="img-fluid rounded" *ngIf="imagePreview" [src]="imagePreview" style="max-width: 300px;">
   <div class="input-group">
     <span class="input-group-text" id="inputGroup-sizing-default">Fecha</span>
     <input class="form-control" type="text" name="date" disabled [value]="getDate()">

@@ -8,6 +8,7 @@
       <div class="post bg-secondary-subtle p-2 rounded" *ngFor="let post of communityPosts">
         <h4>{{post?.title}}</h4>
         <p class="text-dark-emphasis">{{post?.body}}</p>
+        <img *ngIf="post?.image" class="img-fluid shadow rounded mb-3" [src]="post?.image" width="600">
         <p class="text-dark-emphasis">Posted on {{post?.date}}</p>
         <div class="users-comments px-3 py-4">
           <h5>Comments</h5>

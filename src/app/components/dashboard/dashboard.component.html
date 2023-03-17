@@ -1,4 +1,4 @@
-<section class="dashboard w-100 vh-100 bg-body-secondary">
+<section class="dashboard w-100 h-100 bg-body-secondary">
   <header-component></header-component>
   <div class="get-started px-5 py-3"  *ngIf="getPath() == '/dashboard'">
     <h2 class="display-3 mb-5"><span class="text-secondary">Welcome! </span><span class="text-primary">{{currentUser?.username | uppercase}}</span></h2>
@@ -6,7 +6,15 @@
     <p class="fs-1 text-primary text-center">¡Empieza a navegar!</p>
     <div class="warning-alert bg-warning-subtle border border-3 border-warning rounded mt-5 p-3">
       <p class="fs-2 text-warning text-center">¡ATENCIÓN! <i class="bi bi-exclamation-circle"></i></p>
-      <p class="fs-5 text-center">Ten en cuenta que este producto es un <em>early access</em> por lo que la experiencia de usuario puede verse afectada debido a diversas fallas aún no catalogadas. Puede borrar tu cuenta y tu información en todo momento desde la pestaña <em class="text-primary-emphasis"><b>Account</b></em>.</p>
+      <p class="fs-5 text-center">Ten en cuenta que este producto es un <em>early access</em> por lo que la experiencia de usuario puede verse afectada debido a diversas fallas aún no catalogadas. Puedes borrar tu cuenta y toda tu información en cualquier momento desde la pestaña <em class="text-primary-emphasis"><b>Account</b></em>.</p>
+    </div>
+    <div class="features bg-info-subtle border border-3 border-info rounded mt-5 p-3">
+      <p class="fs-2 text-info text-center">Novedades <i class="bi bi-info-circle"></i></p>
+      <ul class="list-group list-group-flush border-info bg-transparent fs-5">
+        <li class="list-group-item bg-transparent"><span class="bg-info mx-3 p-1 rounded">FEATURE</span>Ahora podrás agregar imágenes en tus publicaciones.</li>
+        <li class="list-group-item bg-transparent"><span class="bg-warning mx-3 p-1 rounded">FIX</span>Ahora las cuentas con publicaciones podrán ser borradas.</li>
+        <li class="list-group-item bg-transparent"><span class="bg-success mx-3 p-1 rounded">UPDATE</span>Al momento de subir una imagen, esta tendra una previsualización.</li>
+      </ul>
     </div>
   </div>
   <router-outlet></router-outlet>

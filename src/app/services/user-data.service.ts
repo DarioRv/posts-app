@@ -65,4 +65,12 @@ export class UserDataService {
   getAllCommentsByPostId(postId: any): Observable<any> {
     return this.http.get(`${this.API}/get/all-comments-by-post-id?id=${postId}`);
   }
+
+  saveImage(formdata: any): Observable<any> {
+    return this.http.post(`${this.API}/upload`, formdata);
+  }
+
+  loadImage(filename: string): Observable<any> {
+    return this.http.get(`${this.API}/media/${filename}`, {responseType: 'blob'});
+  }
 }

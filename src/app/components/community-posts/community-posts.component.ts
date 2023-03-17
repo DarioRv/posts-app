@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UserActions } from 'src/app/services/user-actions';
 import { UserDataService } from 'src/app/services/user-data.service';
 
@@ -13,8 +14,9 @@ export class CommunityPostsComponent implements OnInit {
   communityPosts: any = [];
   comment!: string;
   form!: FormGroup;
+  image: any;
 
-  constructor(private userData: UserDataService, private userActions: UserActions, private formBuilder: FormBuilder) {
+  constructor(private userData: UserDataService, private userActions: UserActions, private formBuilder: FormBuilder, private sanitizer: DomSanitizer) {
     this.form = this.formBuilder.group(
       {
         comment: ['', [Validators.required]]
@@ -23,7 +25,14 @@ export class CommunityPostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userData.getAllPosts().subscribe((data: any) => {this.communityPosts = data.reverse();});
+    this.userData.getAllPosts().subscribe((data: any) => {
+      this.communityPosts = data.reverse();
+      this.communityPosts.forEach((post: any) => {
+        if (post.image != null) {
+          post.image = `http://localhost:8080/media/${post.image}`;
+        }
+      });
+    });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
   }
 

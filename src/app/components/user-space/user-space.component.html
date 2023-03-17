@@ -15,6 +15,7 @@
         <h4>{{post?.title}}</h4>
         <p class="text-dark-emphasis">{{post?.body}}</p>
         <p class="text-dark-emphasis">Posted on {{post?.date}}</p>
+        <img *ngIf="post?.image" class="img-fluid shadow rounded mb-3" [src]="post?.image" width="600">
         <div class="users-comments px-3 py-4">
           <h5>Comments</h5>
           <div class="no-comments" *ngIf="post?.postComments?.length == 0">
