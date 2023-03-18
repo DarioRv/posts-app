@@ -15,6 +15,7 @@ import { UserSpaceComponent } from './components/user-space/user-space.component
 import { UserAccountSettingsComponent } from './components/user-account-settings/user-account-settings.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { CommunityPostsComponent } from './components/community-posts/community-posts.component';
+import { ReportFormComponent } from './components/report-form/report-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CommunityPostsComponent } from './components/community-posts/community-
     UserSpaceComponent,
     UserAccountSettingsComponent,
     PostFormComponent,
-    CommunityPostsComponent
+    CommunityPostsComponent,
+    ReportFormComponent
   ],
   imports: [
     BrowserModule,

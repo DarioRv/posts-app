@@ -1,0 +1,27 @@
+<section class="report-form vw-100 vh-100 position-fixed bg-dark-subtle d-flex justify-content-center align-items-center">
+  <form class="w-100 d-flex flex-column gap-3 bg-body-secondary p-5 rounded shadow" style="max-width: 500px;" [formGroup]="reportForm" (submit)="sendReport()">
+    <h2>REPORT FORM</h2>
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" formControlName="reportType">
+        <option value="bug">BUG</option>
+        <option value="suggestion">SUGGESTION</option>
+        <option value="comment">COMMENT</option>
+      </select>
+      <label for="floatingSelect">Select report type</label>
+      <div class="validators" *ngIf="ReportType?.dirty || ReportType?.touched">
+        <span class="text-danger" *ngIf="ReportType?.hasError('required')">You must select a type <i class="bi bi-exclamation-circle"></i></span>
+      </div>
+    </div>
+    <div class="form-floating">
+      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="max-height: 300px;" formControlName="comment"></textarea>
+      <label for="floatingTextarea">Comments</label>
+      <div class="validators" *ngIf="Comment?.dirty || Comment?.touched">
+        <span class="text-danger" *ngIf="Comment?.hasError('required')">You must leave a comment <i class="bi bi-exclamation-circle"></i></span>
+      </div>
+    </div>
+    <div class="buttons d-flex flex-column gap-2">
+      <button class="btn btn-primary" type="submit">SEND</button>
+      <button class="btn btn-outline-danger" type="button" routerLink="">CANCEL</button>
+    </div>
+  </form>
+</section>

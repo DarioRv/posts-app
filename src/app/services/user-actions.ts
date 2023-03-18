@@ -125,4 +125,15 @@ export class UserActions {
       window.location.reload();
     }, 2000);
   }
+
+  saveReport (report: any) {
+    this.userData.saveReport(report).subscribe();
+    this.Toast.fire({
+      icon: 'success',
+      title: 'Reporte enviado. Actualizando la página'
+    })
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
 }

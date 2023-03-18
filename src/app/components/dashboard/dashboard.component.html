@@ -11,11 +11,13 @@
     <div class="features bg-info-subtle border border-3 border-info rounded mt-5 p-3">
       <p class="fs-2 text-info text-center">Novedades <i class="bi bi-info-circle"></i></p>
       <ul class="list-group list-group-flush border-info bg-transparent fs-5">
-        <li class="list-group-item bg-transparent"><span class="bg-info mx-3 p-1 rounded">FEATURE</span>Ahora podrás agregar imágenes en tus publicaciones.</li>
-        <li class="list-group-item bg-transparent"><span class="bg-warning mx-3 p-1 rounded">FIX</span>Ahora las cuentas con publicaciones podrán ser borradas.</li>
-        <li class="list-group-item bg-transparent"><span class="bg-success mx-3 p-1 rounded">UPDATE</span>Al momento de subir una imagen, esta tendra una previsualización.</li>
+        <li class="list-group-item bg-transparent d-flex"><span class="bg-info mx-3 p-1 rounded" style="height: fit-content;">FEATURE</span><span>Ahora podrás agregar imágenes en tus publicaciones.</span></li>
+        <li class="list-group-item bg-transparent d-flex"><span class="bg-info mx-3 p-1 rounded" style="height: fit-content;">FEATURE</span><span>Se agrego un boton que aparecerá en la parte inferior derecha donde prodrás reportar bugs, enviar sugerencias o algún comentario.</span></li>
+        <li class="list-group-item bg-transparent d-flex"><span class="bg-warning mx-3 p-1 rounded" style="height: fit-content;">FIX</span><span>Ahora las cuentas con publicaciones podrán ser borradas.</span></li>
+        <li class="list-group-item bg-transparent d-flex"><span class="bg-success mx-3 p-1 rounded" style="height: fit-content;">UPDATE</span><span>Al momento de subir una imagen, esta tendra una previsualización.</span></li>
       </ul>
     </div>
   </div>
+  <div class="btn btn-outline-success report-bug position-fixed bottom-0 end-0 m-3 p-3 rounded" routerLink="report-form">Report a bug <i class="bi bi-bug-fill"></i></div>
   <router-outlet></router-outlet>
 </section>

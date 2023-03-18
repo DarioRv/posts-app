@@ -73,4 +73,8 @@ export class UserDataService {
   loadImage(filename: string): Observable<any> {
     return this.http.get(`${this.API}/media/${filename}`, {responseType: 'blob'});
   }
+
+  saveReport(report: any): Observable<any> {
+    return this.http.post(`${this.API}/save/report`, report);
+  }
 }
