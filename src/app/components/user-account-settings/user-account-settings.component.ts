@@ -9,6 +9,7 @@ import { UserActions } from 'src/app/services/user-actions';
 export class UserAccountSettingsComponent implements OnInit {
 
   currentUser: any;
+  visiblePassword: boolean = false;
 
   constructor(private userActions: UserActions) {}
 
@@ -20,5 +21,9 @@ export class UserAccountSettingsComponent implements OnInit {
   deleteUser(): void {
     let userId = this.currentUser.id;
     this.userActions.deleteUser(userId);
+  }
+
+  showPassword() {
+    this.visiblePassword = !this.visiblePassword;
   }
 }

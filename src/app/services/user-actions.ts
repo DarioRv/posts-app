@@ -151,4 +151,8 @@ export class UserActions {
   saveImage (formData: any) {
     this.userData.saveImage(formData).subscribe();
   }
+
+  isLogin () {
+    return localStorage.getItem('currentUser') ? true : false;
+  }
 }

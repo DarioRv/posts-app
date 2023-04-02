@@ -1,6 +1,6 @@
 <section class="form vh-100 vw-100 d-flex justify-content-center align-items-center bg-body-secondary fixed-top">
   <form class="w-75 h-75 d-flex flex-column gap-3 bg-dark-subtle rounded p-2 p-md-5 overflow-auto" style="max-width: 400px;" [formGroup]="form" (ngSubmit)="sendForm($event)">
-    <h1 class="text-primary text-decoration-underline">Sign In</h1>
+    <h1 class="text-primary text-decoration-underline">Sign Up</h1>
     <div class="input">
       <label class="mb-2" for="user">User</label>
       <input type="text" class="form-control" name="user" id="user" autocomplete="off" formControlName="user">
@@ -29,9 +29,17 @@
     </div>
     <div class="input">
       <label class="mb-2" for="dateOfBirth">DateOfBirth</label>
-      <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth">
-      <div class="validators" *ngIf="DateOfBirth?.dirty || DateOfBirth?.touched">
-        <span class="text-danger" *ngIf="DateOfBirth?.hasError('required')">La fecha de nacimiento es requerido.</span>
+      <div class="d-flex gap-1">
+        <input type="number" class="form-control" name="day" min="1" max="31" placeholder="day" formControlName="day">
+        <input type="number" class="form-control" name="month" min="1" max="12" placeholder="month" formControlName="month">
+        <input type="number" class="form-control" name="year" min="1900" max="2023" placeholder="year" formControlName="year">
+      </div>
+      <div class="validators" *ngIf="Day?.dirty || Day?.touched || Month?.dirty || Month?.touched || Year?.dirty || Year?.touched">
+        <div class="errors d-flex flex-column">
+          <span class="text-danger" *ngIf="Day?.hasError('required')">El día de nacimiento es requerido.</span>
+          <span class="text-danger" *ngIf="Month?.hasError('required')">El mes de nacimiento es requerido.</span>
+          <span class="text-danger" *ngIf="Year?.hasError('required')">El año de nacimiento es requerido.</span>
+        </div>
       </div>
     </div>
     <div class="input">
@@ -45,7 +53,7 @@
         <span class="text-danger" *ngIf="Sex?.hasError('required')">El sexo es requerido.</span>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-5" [disabled]="sendingForm">{{(sendingForm) ? 'Sending' : 'Sign in'}}</button>
+    <button type="submit" class="btn btn-primary mt-5" [disabled]="sendingForm">{{(sendingForm) ? 'Sending' : 'Sign Up'}}</button>
     <button type="submit" class="btn btn-outline-primary mt-5" routerLink="">Back</button>
   </form>
 </section>

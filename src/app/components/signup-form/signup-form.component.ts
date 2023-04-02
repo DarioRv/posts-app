@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserActions } from 'src/app/services/user-actions';
 import { UserDataService } from 'src/app/services/user-data.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'signin-form',
-  templateUrl: './signin-form.component.html',
-  styleUrls: ['./signin-form.component.css']
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
 })
-export class SigninFormComponent {
+export class SignupFormComponent {
   form!: FormGroup;
   Toast = Swal.mixin({
     toast: true,
@@ -26,7 +25,9 @@ export class SigninFormComponent {
       user: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
-      dateOfBirth: ['', [Validators.required]],
+      day: ['', [Validators.required]],
+      month: ['', [Validators.required]],
+      year: ['', [Validators.required]],
       sex: ['', [Validators.required]]
     });
   }
@@ -43,8 +44,16 @@ export class SigninFormComponent {
    return this.form.get('email');
   }
 
-  get DateOfBirth() {
-    return this.form.get('dateOfBirth');
+  get Day() {
+    return this.form.get('day');
+  }
+
+  get Month() {
+    return this.form.get('month');
+  }
+
+  get Year() {
+    return this.form.get('year');
   }
 
   get Sex() {
@@ -59,7 +68,7 @@ export class SigninFormComponent {
         "username": this.form.get('user')?.value,
         "password": this.form.get('password')?.value,
         "email": this.form.get('email')?.value,
-        "dateOfBirth": this.form.get('dateOfBirth')?.value,
+        "dateOfBirth": `${this.form.get('day')?.value}/${this.form.get('month')?.value}/${this.form.get('year')?.value}`,
         "sex": this.form.get('sex')?.value
       };
       this.userData.saveUser(user).subscribe(() => {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { SigninFormComponent } from './components/signin-form/signin-form.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -11,11 +11,12 @@ import { UserAccountSettingsComponent } from './components/user-account-settings
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { CommunityPostsComponent } from './components/community-posts/community-posts.component';
 import { ReportFormComponent } from './components/report-form/report-form.component';
+import { LoginGuardian } from './guardians/login-guardian';
 
 const routes: Routes = [
   {path: 'login', title: 'Log In', component: LoginFormComponent},
-  {path: 'signin', title: 'Sign In', component: SigninFormComponent},
-  {path: 'dashboard', title: 'Dashboard', component: DashboardComponent,children:
+  {path: 'signin', title: 'Sign In', component: SignupFormComponent},
+  {path: 'dashboard', title: 'Dashboard', component: DashboardComponent, canActivate: [LoginGuardian],children:
   [
     {path: 'my-space', title: 'Dashboard | My Space',component: UserSpaceComponent,children: [
       {path: 'create-post', title: 'Dashboard | Create a post', component: PostFormComponent}

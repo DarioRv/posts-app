@@ -12,6 +12,7 @@ export class PostFormComponent implements OnInit {
   currentUser: any;
   postForm!: FormGroup;
   imagePreview!: string;
+  sendingForm!: boolean;
 
   constructor(private userActions: UserActions, private formBuilder: FormBuilder, private sanitizer: DomSanitizer) {
     this.postForm = this.formBuilder.group({
@@ -44,6 +45,7 @@ export class PostFormComponent implements OnInit {
 
   createPost(event: any) {
     if (this.postForm.valid) {
+      this.sendingForm = true;
       const image = event.target[2].files[0];
       const post = {
         "title": this.Title?.value,
@@ -56,11 +58,10 @@ export class PostFormComponent implements OnInit {
         this.saveImage(image);
       }
       this.userActions.savePost(post);
-      this.postForm.reset();
-      this.imagePreview = '';
     }
     else {
       this.postForm.markAllAsTouched();
+      this.sendingForm = false;
     }
   }
 

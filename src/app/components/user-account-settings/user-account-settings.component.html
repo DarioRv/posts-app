@@ -2,7 +2,7 @@
   <h2 class="display-3 text-primary">My account</h2>
   <div class="user-info">
     <p class="fs-5 bg-primary-subtle rounded p-2">Username: <span class="text-dark-emphasis">{{currentUser?.username}}</span></p>
-    <p class="fs-5 bg-primary-subtle rounded p-2">Password: <span class="text-dark-emphasis">{{currentUser?.password}}</span></p>
+    <p class="fs-5 bg-primary-subtle rounded p-2">Password: <span class="text-dark-emphasis">{{visiblePassword ? currentUser?.password : "********"}}</span><button class="btn btn-outline-warning" (click)="showPassword()">{{visiblePassword ? 'Ocultar' : "Ver"}}</button></p>
     <p class="fs-5 bg-primary-subtle rounded p-2">Sex: <span class="text-dark-emphasis">{{currentUser?.sex}}</span></p>
     <p class="fs-5 bg-primary-subtle rounded p-2">Date of birth: <span class="text-dark-emphasis">{{currentUser?.dateOfBirth}}</span></p>
     <p class="fs-5 bg-primary-subtle rounded p-2">Email: <span class="text-dark-emphasis">{{currentUser?.email}}</span></p>
