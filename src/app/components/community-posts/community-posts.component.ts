@@ -15,6 +15,9 @@ export class CommunityPostsComponent implements OnInit {
   comment!: string;
   form!: FormGroup;
   image: any;
+  dataLoaded: boolean = false;
+  conexionFailed: boolean = false;
+
 
   constructor(private userData: UserDataService, private userActions: UserActions, private formBuilder: FormBuilder, private sanitizer: DomSanitizer) {
     this.form = this.formBuilder.group(
@@ -27,11 +30,12 @@ export class CommunityPostsComponent implements OnInit {
   ngOnInit(): void {
     this.userData.getAllPosts().subscribe((data: any) => {
       this.communityPosts = data.reverse();
-      this.communityPosts.forEach((post: any) => {
+      this.communityPosts.map((post: any) => {
         if (post.image != null) {
           post.image = `http://localhost:8080/media/${post.image}`;
         }
       });
+      this.dataLoaded = true;
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
   }

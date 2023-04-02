@@ -1,7 +1,25 @@
 <section class="user-space w-100 py-3 bg-body-secondary">
   <div class="my-posts px-5">
     <h3 class="display-3 text-primary mb-5">Recently posted</h3>
-    <div class="posts d-flex flex-column gap-3">
+    <div class="loader d-flex justify-content-center gap-3" *ngIf="!dataLoaded && !conexionFailed">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="no-conexion bg-dark-subtle rounded p-4" *ngIf="conexionFailed">
+      <p class="text-secondary m-0 text-center fs-2">Parece que no hay conexión con el servidor</p>
+      <p class="text-secondary m-0 text-center"><i class="fs-1 bi bi-wifi-off"></i></p>
+    </div>
+    <div class="posts d-flex flex-column gap-3" *ngIf="dataLoaded">
       <div class="no-posts" *ngIf="communityPosts?.length == 0">
         <p class="fs-1 text-center bg-info-subtle border border-3 border-info rounded">Aún no existen posts. ¡Sé el primero en crear uno!</p>
       </div>

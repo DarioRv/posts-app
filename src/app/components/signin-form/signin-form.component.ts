@@ -19,6 +19,7 @@ export class SigninFormComponent {
     timer: 2000,
     timerProgressBar: true,
   })
+  sendingForm: boolean = false
 
   constructor(private formBuilder: FormBuilder, private userData: UserDataService, private userActions: UserActions) {
     this.form = this.formBuilder.group({
@@ -53,6 +54,7 @@ export class SigninFormComponent {
   sendForm(event: Event) {
     event.preventDefault;
     if (this.form.valid){
+      this.sendingForm = true;
       const user = {
         "username": this.form.get('user')?.value,
         "password": this.form.get('password')?.value,
@@ -60,17 +62,41 @@ export class SigninFormComponent {
         "dateOfBirth": this.form.get('dateOfBirth')?.value,
         "sex": this.form.get('sex')?.value
       };
-      this.userData.saveUser(user).subscribe();
-      this.Toast.fire({
-        icon: 'success',
-        title: 'Te has registrado. Iniciando sesion.'
-      })
-      const userLogin = {"username": this.form.get('user')?.value, "password": this.form.get('password')?.value};
-      setTimeout(() => {
-        this.userData.login(userLogin).subscribe(data => {
-          this.userActions.login(data)
-        });
-      }, 2000);
+      this.userData.saveUser(user).subscribe(() => {
+        this.Toast.fire({
+          icon: 'success',
+          title: 'Te has registrado. Iniciando sesion.'
+        })},
+        (error: any) => {
+          if (error.status === 0) {
+            this.Toast.fire({
+              icon: 'error',
+              title: 'Se ha perdido la conexión con el servidor'
+            })
+          }
+          if (error.status === 404) {
+            this.Toast.fire({
+              icon: 'error',
+              title: 'Solicitud no encontrada'
+            })
+          }
+          if (error.status === 500) {
+            this.Toast.fire({
+              icon: 'error',
+              title: 'El username elegido no esta disponible'
+            })
+          }
+          this.sendingForm = false;
+        },
+        () => {
+          const userLogin = {"username": this.form.get('user')?.value, "password": this.form.get('password')?.value};
+          setTimeout(() => {
+            this.userData.login(userLogin).subscribe(data => {
+              this.userActions.login(data)
+            });
+          }, 2000);
+        }
+      );
     }else{
       this.form.markAllAsTouched();
     }

@@ -16,7 +16,7 @@
           <span class="text-danger" *ngIf="Password?.hasError('minlength')">La contraseña debe ser de 6 caracteres o más.</span>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-5">Login</button>
+    <button type="submit" class="btn btn-primary mt-5" [disabled]="sendingForm">{{sendingForm ? 'Loading...' : 'Login'}}</button>
     <button type="submit" class="btn btn-outline-primary mt-5" routerLink="">Back</button>
   </form>
 </section>

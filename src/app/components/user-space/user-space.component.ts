@@ -11,6 +11,8 @@ import { UserDataService } from 'src/app/services/user-data.service';
 export class UserSpaceComponent implements OnInit {
   currentUser: any;
   userPosts: any;
+  dataLoaded: boolean = false;
+  conexionFailed: boolean = false;
 
   constructor(private userData: UserDataService, private userActions: UserActions, private sanitizer: DomSanitizer) {}
 
@@ -24,7 +26,8 @@ export class UserSpaceComponent implements OnInit {
           post.image = `http://localhost:8080/media/${post.image}`;
         }
       });
-    })
+      this.dataLoaded = true;
+    });
   }
 
   deletePost(postId: number): void {

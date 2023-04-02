@@ -28,7 +28,7 @@ export class UserActions {
     }, 2000);
   }
 
-  login(user: any): void {
+  login(user: any) {
     if (user != null) {
       this.Toast.fire({
         icon: 'success',
@@ -38,12 +38,14 @@ export class UserActions {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.router.navigateByUrl('dashboard');
       }, 2000);
+      return true;
     }
     else {
       this.Toast.fire({
         icon: 'error',
         title: 'Credenciales incorrectas'
       })
+      return false;
     }
   }
 
@@ -77,14 +79,17 @@ export class UserActions {
   }
 
   savePost(post: any) {
-    this.userData.savePost(post).subscribe();
-    this.Toast.fire({
-      icon: 'success',
-      title: 'Post publicado. Actualizando la página'
-    })
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    this.userData.savePost(post).subscribe(
+      () => {
+        this.Toast.fire({
+          icon: 'success',
+          title: 'Post publicado. Actualizando la página'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    );
   }
 
   deletePost(postId: number) {
@@ -116,24 +121,34 @@ export class UserActions {
   }
 
   deleteComment (commentId: number) {
-    this.userData.deleteComment(commentId).subscribe();
-    this.Toast.fire({
-      icon: 'success',
-      title: 'Comentario eliminado. Actualizando la página'
-    })
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    this.userData.deleteComment(commentId).subscribe(
+      () => {
+        this.Toast.fire({
+          icon: 'success',
+          title: 'Comentario eliminado. Actualizando la página'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    );
   }
 
   saveReport (report: any) {
-    this.userData.saveReport(report).subscribe();
-    this.Toast.fire({
-      icon: 'success',
-      title: 'Reporte enviado. Actualizando la página'
-    })
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    this.userData.saveReport(report).subscribe(
+      () => {
+        this.Toast.fire({
+          icon: 'success',
+          title: 'Reporte enviado. Actualizando la página'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    );
+  }
+
+  saveImage (formData: any) {
+    this.userData.saveImage(formData).subscribe();
   }
 }

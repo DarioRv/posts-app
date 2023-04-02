@@ -36,12 +36,16 @@
     </div>
     <div class="input">
       <label class="mb-2" for="sex">Sex</label>
-      <input type="text" class="form-control" name="sex" id="sex" value="Prefiero no decir" autocomplete="off" formControlName="sex">
+      <select class="form-select" name="sex" id="sex" aria-label="Default select example" formControlName="sex">
+        <option value="o" selected>Prefiero no decir</option>
+        <option value="m">Male</option>
+        <option value="f">Female</option>
+      </select>
       <div class="validators" *ngIf="Sex?.dirty || Sex?.touched">
         <span class="text-danger" *ngIf="Sex?.hasError('required')">El sexo es requerido.</span>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-5">Sign in</button>
+    <button type="submit" class="btn btn-primary mt-5" [disabled]="sendingForm">{{(sendingForm) ? 'Sending' : 'Sign in'}}</button>
     <button type="submit" class="btn btn-outline-primary mt-5" routerLink="">Back</button>
   </form>
 </section>

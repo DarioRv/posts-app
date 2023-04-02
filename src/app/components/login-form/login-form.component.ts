@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserActions } from 'src/app/services/user-actions';
 import { UserDataService } from 'src/app/services/user-data.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'login-form',
@@ -11,13 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginFormComponent {
   form!: FormGroup;
-  Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-  })
+  sendingForm: boolean = false
 
   constructor(private formBuilder: FormBuilder, private userData: UserDataService, private userActions: UserActions) {
     this.form = this.formBuilder.group({
@@ -37,14 +30,18 @@ export class LoginFormComponent {
   sendForm(event: Event) {
     event.preventDefault;
     if (this.form.valid){
+      this.sendingForm = true;
       const userLogin = {
         "username": this.User?.value,
         "password": this.Password?.value
       };
-      this.userData.login(userLogin).subscribe((data: any) => {
-        this.userActions.login(data);
+      this.userData.login(userLogin).subscribe((userData: any) => {
+        if (!this.userActions.login(userData)) {
+          this.sendingForm = false;
+        }
       });
-    }else{
+    }
+    else{
       this.form.markAllAsTouched();
     }
   }

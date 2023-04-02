@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserActions } from 'src/app/services/user-actions';
-import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'post-form',
@@ -14,7 +13,7 @@ export class PostFormComponent implements OnInit {
   postForm!: FormGroup;
   imagePreview!: string;
 
-  constructor(private userActions: UserActions, private userData: UserDataService, private formBuilder: FormBuilder, private sanitizer: DomSanitizer) {
+  constructor(private userActions: UserActions, private formBuilder: FormBuilder, private sanitizer: DomSanitizer) {
     this.postForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       body: ['', [Validators.required]],
@@ -49,11 +48,13 @@ export class PostFormComponent implements OnInit {
       const post = {
         "title": this.Title?.value,
         "body": this.Body?.value,
-        "image": image.name,
+        "image": image ? image.name : null,
         "date": this.getDate(),
         "userOwner": this.currentUser
       }
-      this.saveImage(image);
+      if (image != undefined) {
+        this.saveImage(image);
+      }
       this.userActions.savePost(post);
       this.postForm.reset();
       this.imagePreview = '';
@@ -96,6 +97,6 @@ export class PostFormComponent implements OnInit {
   saveImage(image: any) {
     const formData = new FormData();
     formData.append('file', image);
-    this.userData.saveImage(formData).subscribe();
+    this.userActions.saveImage(formData);
   }
 }
