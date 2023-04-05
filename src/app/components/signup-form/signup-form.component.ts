@@ -75,37 +75,14 @@ export class SignupFormComponent {
         this.Toast.fire({
           icon: 'success',
           title: 'Te has registrado. Iniciando sesion.'
-        })},
-        (error: any) => {
-          if (error.status === 0) {
-            this.Toast.fire({
-              icon: 'error',
-              title: 'Se ha perdido la conexión con el servidor'
-            })
-          }
-          if (error.status === 404) {
-            this.Toast.fire({
-              icon: 'error',
-              title: 'Solicitud no encontrada'
-            })
-          }
-          if (error.status === 500) {
-            this.Toast.fire({
-              icon: 'error',
-              title: 'El username elegido no esta disponible'
-            })
-          }
-          this.sendingForm = false;
-        },
-        () => {
-          const userLogin = {"username": this.form.get('user')?.value, "password": this.form.get('password')?.value};
+        })
+        const userLogin = {"username": this.form.get('user')?.value, "password": this.form.get('password')?.value};
           setTimeout(() => {
             this.userData.login(userLogin).subscribe(data => {
               this.userActions.login(data)
             });
           }, 2000);
-        }
-      );
+      });
     }else{
       this.form.markAllAsTouched();
     }
