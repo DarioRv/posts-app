@@ -1,27 +1,33 @@
-# FormularioLogin
+# Aplicación web de publicaciones
+![GitHub last commit](https://img.shields.io/github/last-commit/DarioRv/posts-app?logo=github&style=flat-square)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+## Descripción
+Esta aplicación web permite a los usuarios registrarse, iniciar sesión, crear publicaciones, editarlas y eliminarlas. También permite a los usuarios ver las publicaciones de otros usuarios y comentarlas.
 
-## Development server
+## Instalación
+1. Configurar la parte backend de la aplicación
+Haz click [aquí](https://github.com/DarioRv/posts-app-api) para ver el repositorio de la parte backend de la aplicación.
+2. Clonar el repositorio
+```
+git clone
+```
+3. Instalar las dependencias
+```
+npm install
+```
+4. Ejecutar el servidor
+```
+ng serve
+```
+5. Para acceder a la aplicación, abrir el navegador en `http://localhost:4200/`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías
+![HTML5](https://img.shields.io/badge/-HTML5-%23E44D27?style=flat-square&logo=html5&logoColor=ffffff)
+![CSS3](https://img.shields.io/badge/-CSS3-blue?logo=css3)
+![TypeScript](https://img.shields.io/badge/-TypeScript-%23007ACC?style=flat-square&logo=typescript&logoColor=ffffff)
+![Angular](https://img.shields.io/badge/-Angular-%23dd1b16?style=flat-square&logo=angular&logoColor=fff)
+![Bootstrap](https://img.shields.io/badge/-Bootstrap-%23563d7c?style=flat-square&logo=bootstrap&logoColor=fff)
+![SweetAlert2](https://img.shields.io/badge/-SweetAlert2-%23A08981?style=flat-square&logoColor=fff)
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Última actualización
+Abril 2023
