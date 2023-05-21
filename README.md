@@ -5,8 +5,7 @@
 Esta aplicación web permite a los usuarios registrarse, iniciar sesión, crear publicaciones, editarlas y eliminarlas. También permite a los usuarios ver las publicaciones de otros usuarios y comentarlas.
 
 ## Instalación
-1. Configurar la parte backend de la aplicación
-Haz click [aquí](https://github.com/DarioRv/posts-app-api) para ver el repositorio de la parte backend de la aplicación.
+1. Configurar la parte backend de la aplicación haz click [aquí](https://github.com/DarioRv/posts-app-api) para ver el repositorio.
 2. Clonar el repositorio
 ```
 git clone
